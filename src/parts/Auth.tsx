@@ -25,6 +25,13 @@ import {connect} from "react-redux";
   )
 }
 
-const mapStateToProps = (state: any) => ({
-  isAuthOpen: state.app.isAuthOpen
+const mapState = (state: any) => ({
 })
+
+const mapDispatch = {
+
+}
+
+const connector = connect(mapState, mapDispatch)
+
+export default connector(Auth)
