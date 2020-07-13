@@ -5,14 +5,14 @@ import {} from "./NavBar.module.css"
 
 export const NavBar: React.FC = () => {
 
-    const myRoutes = MyRoutes;
+  const myRoutes = MyRoutes;
   let isAuthOpen = false;
 
-    const [MyTitle, setMyTitle] = useState(myRoutes.find( item => item.path == window.location.pathname)['caption']);
+  const [MyTitle, setMyTitle] = useState(myRoutes.find( item => item.path == window.location.pathname)['caption']);
 
-    useEffect(() => {
-        titleHandler();
-    }, [window.location.pathname])
+  useEffect(() => {
+      titleHandler();
+  }, [window.location.pathname])
 
   useEffect( ()=> {
 
