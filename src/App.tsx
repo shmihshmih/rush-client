@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {ReactDOM, useEffect, useState} from 'react';
 import {AboutPage} from "./pages/AboutPage";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {MainPage} from "./pages/MainPage";
 import {RatingPage} from "./pages/RatingPage";
 import {ProfilePage} from "./pages/ProfilePage";
 import {NavBar} from "./parts/NavBar";
+import {SoloQuestPage} from "./pages/SoloQuests";
+import {Auth} from "./parts/Auth";
 
 function App() {
   return (
@@ -17,11 +19,12 @@ function App() {
                         <Route path='/rating' component={RatingPage} />
                         <Route path='/about' component={AboutPage} />
                         <Route path='/profile/:id' component={ProfilePage} />
+                        <Route path='/solo' component={SoloQuestPage} />
                     </Switch>
                 </div>
             </BrowserRouter>
         </div>
   );
-}
+};
 
 export default App;

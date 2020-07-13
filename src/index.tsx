@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {Auth} from "./parts/Auth";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
+);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Auth />
+  </React.StrictMode>,
+  document.getElementById('auth-modal')
 );
 
 // If you want your app to work offline and load faster, you can change

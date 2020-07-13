@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {NavLink} from "react-router-dom";
 import {MyRoutes} from "../MyRoutes";
+import {} from "./NavBar.module.css"
 
 export const NavBar: React.FC = () => {
 
     const myRoutes = MyRoutes;
+  let isAuthOpen = false;
 
     const [MyTitle, setMyTitle] = useState(myRoutes.find( item => item.path == window.location.pathname)['caption']);
 
@@ -12,9 +14,18 @@ export const NavBar: React.FC = () => {
         titleHandler();
     }, [window.location.pathname])
 
+  useEffect( ()=> {
+
+  }, [])
+
     function titleHandler() {
         setMyTitle(myRoutes.find( item => item.path == window.location.pathname)['caption'])
         document.title = MyTitle;
+    }
+
+    function authHandler() {
+      isAuthOpen = !isAuthOpen;
+      console.log(isAuthOpen);
     }
 
     return (
@@ -26,8 +37,7 @@ export const NavBar: React.FC = () => {
                 } )}
             </ul>
             <ul className="right hide-on-med-and-down">
-                <li><NavLink to="/auth">Авторизация</NavLink></li>
-                <li><NavLink to="/registration">Регистрация</NavLink></li>
+                <li><NavLink to="/auth" onClick={authHandler}>Войти</NavLink></li>
             </ul>
         </div>
     </nav>
