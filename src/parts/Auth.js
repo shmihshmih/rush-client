@@ -9,12 +9,12 @@ function Auth  (props)  {
 
    function modalHandler() {
      authOpen ? props.setHide() : props.setOpen();
-     setAuthOpen(props.isAuthOpenReducer.isAuthOpen)
+     setAuthOpen(!props.isAuthOpenReducer.isAuthOpen)
    }
 
    useEffect(() => {
     authOpen ? setAuthVisClass("authVisible") : setAuthVisClass("authNotVisible")
-   }, [authOpen])
+   }, [props.isAuthOpenReducer.isAuthOpen])
 
   return (
     <div>

@@ -1,17 +1,18 @@
 import {HIDE_AUTH, SHOW_AUTH} from "./type";
 import {combineReducers} from "redux";
 
-function authReducer(state, action) {
+const initialState = {
+  isAuthOpen: false
+}
+
+function authReducer(state = initialState, action) {
   switch (action.type) {
     case SHOW_AUTH:
       return {...state, isAuthOpen: true};
-      break;
     case HIDE_AUTH:
       return {...state, isAuthOpen: false};
-      break;
     default:
       return {...state, isAuthOpen: false};
-      break;
   }
 }
 

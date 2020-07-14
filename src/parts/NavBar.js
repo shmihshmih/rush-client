@@ -8,6 +8,8 @@ export const NavBar = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [MyTitle, setMyTitle] = useState("");
 
+  // TODO add redux logic here
+
   useEffect(() => {
       titleHandler();
   }, [window.location.pathname])
