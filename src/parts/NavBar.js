@@ -3,29 +3,22 @@ import {NavLink} from "react-router-dom";
 import {MyRoutes} from "../MyRoutes";
 import {} from "./NavBar.module.css"
 
-export const NavBar: React.FC = () => {
-
+export const NavBar = () => {
   const myRoutes = MyRoutes;
-  let isAuthOpen = false;
-
-  const [MyTitle, setMyTitle] = useState(myRoutes.find( item => item.path == window.location.pathname)['caption']);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [MyTitle, setMyTitle] = useState("");
 
   useEffect(() => {
       titleHandler();
   }, [window.location.pathname])
 
-  useEffect( ()=> {
-
-  }, [])
-
     function titleHandler() {
-        setMyTitle(myRoutes.find( item => item.path == window.location.pathname)['caption'])
-        document.title = MyTitle;
+      let docTitle = myRoutes.find( item => item.path == window.location.pathname);
+        setMyTitle(docTitle ? docTitle['caption'] : "");
     }
 
     function authHandler() {
-      isAuthOpen = !isAuthOpen;
-      console.log(isAuthOpen);
+      setAuthOpen(!authOpen) ;
     }
 
     return (

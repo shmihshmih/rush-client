@@ -1,6 +1,6 @@
 import React from "react"
 
-export const RatingPage: React.FC = () => {
+export const RatingPage = () => {
     return (
         <h1>Welcome! RatingPage!</h1>
     )

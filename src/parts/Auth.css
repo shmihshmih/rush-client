@@ -1,0 +1,12 @@
+.authModal {
+    background-color: azure;
+    border-radius: 15px;
+}
+
+.authVisible {
+    display: block;
+}
+
+.authNotVisible {
+    display: none;
+}

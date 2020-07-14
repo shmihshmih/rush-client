@@ -6,14 +6,9 @@ import {RatingPage} from "./pages/RatingPage";
 import {ProfilePage} from "./pages/ProfilePage";
 import {NavBar} from "./parts/NavBar";
 import {SoloQuestPage} from "./pages/SoloQuests";
-import { createStore } from 'redux'
-import {rootReducer} from "./station/reducer";
-import { Provider } from 'react-redux';
 
 function App() {
-  const store = createStore(rootReducer);
   return (
-    <Provider store={store}>
       <div className="App">
         <BrowserRouter>
           <NavBar/>
@@ -28,7 +23,6 @@ function App() {
           </div>
         </BrowserRouter>
       </div>
-    </Provider>
   );
 };
 
