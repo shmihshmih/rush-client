@@ -2,10 +2,12 @@ import React, {useEffect, useState} from 'react'
 import {NavLink} from "react-router-dom";
 import {MyRoutes} from "../MyRoutes";
 import {} from "./NavBar.module.css"
+import {connect} from "react-redux";
+import {hideAuth, showAuth} from "../station/action";
 
-export const NavBar = () => {
+function NavBar(props) {
   const myRoutes = MyRoutes;
-  const [authOpen, setAuthOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(props.isAuthOpenReducer.isAuthOpen);
   const [MyTitle, setMyTitle] = useState("");
 
   // TODO add redux logic here
@@ -14,13 +16,16 @@ export const NavBar = () => {
       titleHandler();
   }, [window.location.pathname])
 
+  useEffect( () => {
+  }, [props.isAuthOpenReducer.isAuthOpen])
+
     function titleHandler() {
       let docTitle = myRoutes.find( item => item.path == window.location.pathname);
         setMyTitle(docTitle ? docTitle['caption'] : "");
     }
 
     function authHandler() {
-      setAuthOpen(!authOpen) ;
+      props.isAuthOpenReducer.isAuthOpen ? props.hideAuth() : props.showAuth()
     }
 
     return (
@@ -32,9 +37,20 @@ export const NavBar = () => {
                 } )}
             </ul>
             <ul className="right hide-on-med-and-down">
-                <li><NavLink to="/auth" onClick={authHandler}>Войти</NavLink></li>
+                <li><a onClick={authHandler}>Войти</a></li>
             </ul>
         </div>
     </nav>
     )
 }
+
+const mapStateToProps = (stateFromReducer) => {
+  return stateFromReducer
+}
+
+const mapDispatchToProps = {
+  hideAuth,
+  showAuth
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

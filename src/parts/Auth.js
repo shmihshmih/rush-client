@@ -4,21 +4,16 @@ import {connect} from "react-redux";
 import { hideAuth, showAuth } from '../station/action'
 
 function Auth  (props)  {
-   const [authOpen, setAuthOpen] = useState(props.isAuthOpenReducer.isAuthOpen);
-   const [authVisClass, setAuthVisClass] = useState("authNotVisible");
-
+   const [authStatus, setAuthStatus] = useState(props.isAuthOpenReducer);
    function modalHandler() {
-     authOpen ? props.setHide() : props.setOpen();
-     setAuthOpen(!props.isAuthOpenReducer.isAuthOpen)
+     authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
    }
-
    useEffect(() => {
-    authOpen ? setAuthVisClass("authVisible") : setAuthVisClass("authNotVisible")
+     setAuthStatus(props.isAuthOpenReducer)
    }, [props.isAuthOpenReducer.isAuthOpen])
-
   return (
-    <div>
-      <div id="modal1" className="modal modal-trigger">
+    <>
+      <div id="modal1" className="modal open modal-trigger">
         <div className="modal-content">
           <h4>Modal Header</h4>
           <p>A bunch of text</p>
@@ -27,9 +22,7 @@ function Auth  (props)  {
           <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
         </div>
       </div>
-      <button onClick={modalHandler}>TUTUTUTUT</button>
-      <div className={authVisClass}>ya tutta</div>
-    </div>
+    </>
   )
 }
 
@@ -38,8 +31,8 @@ const mapStateToProps = (stateFromReducer) => {
 }
 
 const mapDispatchToProps = {
-  setHide: hideAuth,
-  setOpen: showAuth
+  hideAuth,
+  showAuth
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

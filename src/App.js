@@ -4,7 +4,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {MainPage} from "./pages/MainPage";
 import {RatingPage} from "./pages/RatingPage";
 import {ProfilePage} from "./pages/ProfilePage";
-import {NavBar} from "./parts/NavBar";
+import NavBar from "./parts/NavBar";
 import {SoloQuestPage} from "./pages/SoloQuests";
 
 function App() {
