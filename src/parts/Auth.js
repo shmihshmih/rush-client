@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react"
 import './Auth.css'
-import {connect} from "react-redux";
+import {connect} from "react-redux"
 import { hideAuth, showAuth } from '../station/action'
+import ReactDOM from 'react-dom'
 
 function Auth  (props)  {
    const [authStatus, setAuthStatus] = useState(props.isAuthOpenReducer);
@@ -11,7 +12,8 @@ function Auth  (props)  {
    useEffect(() => {
      setAuthStatus(props.isAuthOpenReducer)
    }, [props.isAuthOpenReducer.isAuthOpen])
-  return (
+
+  let Auth = (
     <>
       <div id="modal1" className="modal open modal-trigger">
         <div className="modal-content">
@@ -24,6 +26,7 @@ function Auth  (props)  {
       </div>
     </>
   )
+  return ReactDOM.createPortal(Auth, document.getElementById('auth-modal'))
 }
 
 const mapStateToProps = (stateFromReducer) => {

@@ -15,16 +15,8 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      <Auth/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
-);
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Auth />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('auth-modal')
 );
