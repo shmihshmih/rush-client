@@ -17,11 +17,23 @@ function Auth  (props)  {
     <>
       <div id="modal1" className={authStatus.isAuthOpen ? "modal open-modal" : "modal"}>
         <div className="modal-content">
-          <h4>Modal Header</h4>
-          <p>A bunch of text</p>
+          <h4>Войти</h4>
+          <div className="row">
+            <form className="col s12">
+              <div className="row">
+                <div className="input-field col s12">
+                  <input id="email" type="email" className="validate"/>
+                    <label htmlFor="email">Email</label>
+                    <span className="helper-text" data-error="wrong" data-success="right">
+                      Введите свою электронную почту
+                    </span>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
         <div className="modal-footer">
-          <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
+          <a onClick={modalHandler} className="modal-close waves-effect waves-green btn-flat">Войти</a>
         </div>
       </div>
       <div onClick={modalHandler} className={authStatus.isAuthOpen ? "modal-overlay" : ""} />

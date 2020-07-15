@@ -31,12 +31,12 @@ function NavBar(props) {
     return (
     <nav>
       <div className="nav-wrapper">
-        <ul onClick={() => titleHandler()} id="nav-mobile" className="left hide-on-med-and-down">
+        <ul onClick={() => titleHandler()} id="nav-mobile" className="left">
           {MyRoutes.map( (item, index)=> {
             return <li key={item.component}><NavLink to={item.path}>{item.caption}</NavLink></li>
           } )}
         </ul>
-        <ul className="right hide-on-med-and-down">
+        <ul className="right">
             <li><a onClick={authHandler}>Войти</a></li>
         </ul>
       </div>
