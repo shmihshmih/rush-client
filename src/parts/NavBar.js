@@ -19,27 +19,27 @@ function NavBar(props) {
   useEffect( () => {
   }, [props.isAuthOpenReducer.isAuthOpen])
 
-    function titleHandler() {
-      let docTitle = myRoutes.find( item => item.path == window.location.pathname);
-        setMyTitle(docTitle ? docTitle['caption'] : "");
-    }
+  function titleHandler() {
+    let docTitle = myRoutes.find( item => item.path == window.location.pathname);
+      setMyTitle(docTitle ? docTitle['caption'] : "");
+  }
 
-    function authHandler() {
-      props.isAuthOpenReducer.isAuthOpen ? props.hideAuth() : props.showAuth()
-    }
+  function authHandler() {
+    props.isAuthOpenReducer.isAuthOpen ? props.hideAuth() : props.showAuth()
+  }
 
     return (
     <nav>
-        <div className="nav-wrapper">
-            <ul onClick={() => titleHandler()} id="nav-mobile" className="left hide-on-med-and-down">
-                {MyRoutes.map( (item, index)=> {
-                    return <li key={item.component}><NavLink to={item.path}>{item.caption}</NavLink></li>
-                } )}
-            </ul>
-            <ul className="right hide-on-med-and-down">
-                <li><a onClick={authHandler}>Войти</a></li>
-            </ul>
-        </div>
+      <div className="nav-wrapper">
+        <ul onClick={() => titleHandler()} id="nav-mobile" className="left hide-on-med-and-down">
+          {MyRoutes.map( (item, index)=> {
+            return <li key={item.component}><NavLink to={item.path}>{item.caption}</NavLink></li>
+          } )}
+        </ul>
+        <ul className="right hide-on-med-and-down">
+            <li><a onClick={authHandler}>Войти</a></li>
+        </ul>
+      </div>
     </nav>
     )
 }

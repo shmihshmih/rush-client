@@ -15,7 +15,7 @@ function Auth  (props)  {
 
   let Auth = (
     <>
-      <div id="modal1" className="modal open modal-trigger">
+      <div id="modal1" className={authStatus.isAuthOpen ? "modal open-modal" : "modal"}>
         <div className="modal-content">
           <h4>Modal Header</h4>
           <p>A bunch of text</p>
@@ -24,6 +24,7 @@ function Auth  (props)  {
           <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
         </div>
       </div>
+      <div onClick={modalHandler} className={authStatus.isAuthOpen ? "modal-overlay" : ""} />
     </>
   )
   return ReactDOM.createPortal(Auth, document.getElementById('auth-modal'))
