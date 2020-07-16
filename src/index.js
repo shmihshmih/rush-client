@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Auth from "./parts/Auth";
+import Auth from "./parts/AuthPart/Auth";
 import {createStore} from "redux";
 import {rootReducer} from "./station/reducer";
 import {Provider} from "react-redux";
@@ -14,7 +14,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <App/>
       <Auth/>
     </Provider>
   </React.StrictMode>,

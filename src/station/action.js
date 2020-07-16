@@ -5,6 +5,7 @@ export function hideAuth() {
     type: HIDE_AUTH
   }
 }
+
 export function showAuth() {
   return {
     type: SHOW_AUTH
