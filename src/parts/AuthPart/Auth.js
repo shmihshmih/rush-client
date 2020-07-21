@@ -3,6 +3,7 @@ import './Auth.css'
 import {connect} from "react-redux"
 import {hideAuth, showAuth} from '../../station/action'
 import ReactDOM from 'react-dom'
+import * as axios from "axios";
 
 function Auth(props) {
   //TODO harcoded change to bd
@@ -53,12 +54,41 @@ function Auth(props) {
 
   const [authStatus, setAuthStatus] = useState(props.isAuthOpenReducer);
 
-  function modalHandler(e) {
-    let fod = users.find( user => user.email == "sokolik@protonmail.com")
-    fod ? console.log('est') : console.log('nonono');
-    setInterval( () => {
+  async function modalHandler(e) {
+    try {
+      const isEmailExists = async () => {
+        await axios.post(
+          'localhost:5000/api/auth/dr', {
+            name: 'Dodik',
+            email: "dodik@protonmail.com",
+            avatar: "https://picsum.photos/200/200?random=3",
+            isDriver: false,
+            isPedestrian: true,
+            about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
+            birth: new Date(),
+            rate: "25",
+            car: "Chevrolet Cruise",
+            isCarVisible: true,
+            carNumber: "c250jv",
+            isCarNumberVisible: true
+          },
+          {  headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            }}
+          )
+      }
+
+      isEmailExists().then(response => {
+        console.log("Success ========>", response);
+      })
+    } catch(e) {console.log(e.message)}
+
+    if(e.key === 'Enter') {
+      e.preventDefault();
       authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
-    }, 2000)
+    }
   }
 
   function emailInputHandler(e) {
@@ -78,7 +108,13 @@ function Auth(props) {
             <form className="col s12">
               <div className="row">
                 <div className="input-field col s12">
-                  <input id="email" type="email" className="validate" onChange={emailInputHandler}/>
+                  <input
+                    id="email"
+                    type="email"
+                    className="validate"
+                    onChange={emailInputHandler}
+                    onKeyPress={modalHandler}
+                  />
                   <label htmlFor="email">Email</label>
                   <span className="helper-text" data-error="wrong" data-success="right">
                       Введите свою электронную почту
