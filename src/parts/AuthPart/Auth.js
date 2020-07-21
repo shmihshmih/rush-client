@@ -56,33 +56,33 @@ function Auth(props) {
 
   async function modalHandler(e) {
     try {
-      const isEmailExists = async () => {
-        await axios.post(
-          'localhost:5000/api/auth/dr', {
-            name: 'Dodik',
-            email: "dodik@protonmail.com",
-            avatar: "https://picsum.photos/200/200?random=3",
-            isDriver: false,
-            isPedestrian: true,
-            about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
-            birth: new Date(),
-            rate: "25",
-            car: "Chevrolet Cruise",
-            isCarVisible: true,
-            carNumber: "c250jv",
-            isCarNumberVisible: true
-          },
-          {  headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'X-Requested-With': 'XMLHttpRequest'
-            }}
-          )
+      let addUser = {
+        id: Math.random().toFixed(2).toString(),
+        name: 'Dodik2',
+        email: "dodik@protonmail.com",
+        avatar: "https://picsum.photos/200/200?random=3",
+        isDriver: false,
+        isPedestrian: true,
+        about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
+        birth: new Date(),
+        rate: "25",
+        car: "Chevrolet Cruise",
+        isCarVisible: true,
+        carNumber: "c250jv",
+        isCarNumberVisible: true
       }
 
-      isEmailExists().then(response => {
-        console.log("Success ========>", response);
+      axios.post('http://127.0.0.1:5000/api/auth/create', {
+        ...addUser
       })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
     } catch(e) {console.log(e.message)}
 
     if(e.key === 'Enter') {
