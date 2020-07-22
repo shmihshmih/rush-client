@@ -53,27 +53,25 @@ function Auth(props) {
   ]
 
   const [authStatus, setAuthStatus] = useState(props.isAuthOpenReducer);
+  const [currentUser, setCurrentUser] = useState({email: ""})
 
-  async function modalHandler(e) {
+  function modalHandler() {
+    authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
+  }
+
+  const inputKeyPressHandler = (e) => {
+    if(e.key === 'Enter') {
+      e.preventDefault()
+      authHandler().then((req, res) => {
+        console.log(res);
+      });
+    }
+  }
+
+  const authHandler = async () => {
     try {
-      let addUser = {
-        id: Math.random().toFixed(2).toString(),
-        name: 'Dodik2',
-        email: "dodik@protonmail.com",
-        avatar: "https://picsum.photos/200/200?random=3",
-        isDriver: false,
-        isPedestrian: true,
-        about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
-        birth: new Date(),
-        rate: "25",
-        car: "Chevrolet Cruise",
-        isCarVisible: true,
-        carNumber: "c250jv",
-        isCarNumberVisible: true
-      }
-
-      axios.post('http://127.0.0.1:5000/api/auth/create', {
-        ...addUser
+      axios.post('http://127.0.0.1:5000/api/auth/', {
+        ...currentUser
       })
         .then(function (response) {
           console.log(response);
@@ -81,18 +79,8 @@ function Auth(props) {
         .catch(function (error) {
           console.log(error);
         });
-
-
-    } catch(e) {console.log(e.message)}
-
-    if(e.key === 'Enter') {
-      e.preventDefault();
-      authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
-    }
-  }
-
-  function emailInputHandler(e) {
-    console.log(e.target.value)
+    } catch(e) {console.log('error', e.message)}
+    modalHandler()
   }
 
   useEffect(() => {
@@ -112,8 +100,9 @@ function Auth(props) {
                     id="email"
                     type="email"
                     className="validate"
-                    onChange={emailInputHandler}
-                    onKeyPress={modalHandler}
+                    value={currentUser.email}
+                    onChange={e => setCurrentUser({...currentUser, ...{email: e.target.value}})}
+                    onKeyPress={inputKeyPressHandler}
                   />
                   <label htmlFor="email">Email</label>
                   <span className="helper-text" data-error="wrong" data-success="right">
@@ -125,7 +114,7 @@ function Auth(props) {
           </div>
         </div>
         <div className="modal-footer">
-          <a onClick={modalHandler} className="modal-close waves-effect waves-green btn-flat">Войти</a>
+          <a onClick={authHandler} className="modal-close waves-effect waves-green btn-flat">Войти</a>
         </div>
       </div>
       <div onClick={modalHandler} className={authStatus.isAuthOpen ? "modal-overlay" : ""}/>
