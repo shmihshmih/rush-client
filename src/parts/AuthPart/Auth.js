@@ -7,60 +7,21 @@ import * as axios from "axios";
 
 function Auth(props) {
   //TODO harcoded change to bd
-  const users = [
-    {
-      name: 'Dodik',
-      email: "dodik@protonmail.com",
-      avatar: "https://picsum.photos/200/200?random=3",
-      isDriver: false,
-      isPedestrian: true,
-      about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
-      birth: "16-05-1992",
-      rate: "25",
-      car: "Chevrolet Cruise",
-      isCarVisible: true,
-      carNumber: "c250jv",
-      isCarNumberVisible: true
-    },
-    {
-      name: 'bobolik',
-      email: "bobolik@protonmail.com",
-      avatar: "https://picsum.photos/200/200?random=3",
-      isDriver: false,
-      isPedestrian: true,
-      about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
-      birth: "16-05-1992",
-      rate: "25",
-      car: "Chevrolet Cruise",
-      isCarVisible: true,
-      carNumber: "c250jv",
-      isCarNumberVisible: true
-    },
-    {
-      name: 'sokolik',
-      email: "sokolik@protonmail.com",
-      avatar: "https://picsum.photos/200/200?random=3",
-      isDriver: false,
-      isPedestrian: true,
-      about: "Ya takoy klassniy, horosho razgadivayui zagadki da i viibshe umnik hot, kuda, chmafff'",
-      birth: "16-05-1992",
-      rate: "25",
-      car: "Chevrolet Cruise",
-      isCarVisible: true,
-      carNumber: "c250jv",
-      isCarNumberVisible: true
-    }
-  ]
-
   const [authStatus, setAuthStatus] = useState(props.isAuthOpenReducer);
-  const [currentUser, setCurrentUser] = useState({email: ""})
+  const [currentUser, setCurrentUser] = useState({
+    email: "",
+    isCarNumberVisible: false,
+    isCarVisible: false,
+    isPedestrian: false,
+    isDriver: false})
+  const [openRegForm, setOpenRegForm] = useState('')
 
   function modalHandler() {
     authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
   }
 
   const inputKeyPressHandler = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       e.preventDefault()
       authHandler().then((req, res) => {
         console.log(res);
@@ -73,14 +34,21 @@ function Auth(props) {
       axios.post('http://127.0.0.1:5000/api/auth/', {
         ...currentUser
       })
-        .then(function (response) {
-          console.log(response);
+        .then((res) => {
+          if (res.data && res.data.isExist && res.data.isExist.email || res.data.createdNow) {
+            setOpenRegForm('login')
+          } else {
+            setOpenRegForm('registration')
+          }
         })
         .catch(function (error) {
           console.log(error);
         });
-    } catch(e) {console.log('error', e.message)}
-    modalHandler()
+    } catch (e) {
+      console.log('error', e.message)
+    }
+
+    setOpenRegForm ? console.log('do reg') : modalHandler()
   }
 
   useEffect(() => {
@@ -94,21 +62,190 @@ function Auth(props) {
           <h4>Войти</h4>
           <div className="row">
             <form className="col s12">
+
               <div className="row">
                 <div className="input-field col s12">
                   <input
                     id="email"
                     type="email"
+                    name="email"
                     className="validate"
                     value={currentUser.email}
-                    onChange={e => setCurrentUser({...currentUser, ...{email: e.target.value}})}
+                    onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
                     onKeyPress={inputKeyPressHandler}
                   />
                   <label htmlFor="email">Email</label>
                   <span className="helper-text" data-error="wrong" data-success="right">
-                      Введите свою электронную почту
-                    </span>
+                    Введите свою электронную почту
+                  </span>
                 </div>
+
+                {openRegForm === 'login'
+                  ?
+                  <div>
+                    <div className="input-field col s12">
+                      <input
+                        id="password"
+                        type="password"
+                        className="validate"
+                        name="password"
+                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                      />
+                      <label htmlFor="password">Введите пароль</label>
+                    </div>
+                  </div>
+                  : ''
+                }
+
+                {openRegForm === 'registration'
+                  ?
+                  <div>
+
+                    <div className="input-field col s12">
+                      <input
+                        id="password"
+                        type="password"
+                        className="validate"
+                        name="password"
+                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                      />
+                      <label htmlFor="password">Введите пароль</label>
+                    </div>
+
+                    <div className="input-field col s12">
+                      <input
+                        id="name"
+                        type="text"
+                        className="validate"
+                        name="name"
+                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                      />
+                      <label htmlFor="name">Введите имя</label>
+                    </div>
+
+                    <div className="input-field col s12">
+                      <input
+                        id="birth_date"
+                        type="text"
+                        className="validate"
+                        name="birth"
+                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                      />
+                      <label htmlFor="birth_date">Дата рождения</label>
+                      <span className="helper-text" data-error="wrong"
+                            data-success="right">Введите в формате 01.01.1990</span>
+                    </div>
+
+                    <div className="col s12">
+                      <div className="row">
+                        <div className="input-field col s12">
+                          <textarea
+                            id="about"
+                            className="materialize-textarea"
+                            name="about"
+                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                          />
+                          <label htmlFor="about">О себе</label>
+                          <span className="helper-text" data-error="wrong" data-success="right">Можно указать своё хобби, ключевые навыки и т.д.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col s12">
+                      <p>
+                        <label className="col ">
+                          <input
+                            type="checkbox"
+                            className="filled-in"
+                            name="isDriver"
+                            value={currentUser.isDriver}
+                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                          />
+                          <span>Водитель</span>
+                        </label>
+                        <label className="col ">
+                          <input
+                            type="checkbox"
+                            className="filled-in"
+                            name="isPedestrian"
+                            value={currentUser.isPedestrian}
+                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                          />
+                          <span>Пассажир</span>
+                        </label>
+                      </p>
+                    </div>
+
+                    <div className="input-field col s12">
+                      <input
+                        id="avatar"
+                        type="text"
+                        className="validate"
+                        name="avatar"
+                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                      />
+                      <label htmlFor="avatar">Ссылка на аватар</label>
+                    </div>
+
+                    <div className="col s12">
+                      <div className="row">
+                        <div className="input-field col s6">
+                          <input
+                            id="car"
+                            type="text"
+                            className="validate"
+                            name="car"
+                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                          />
+                          <label htmlFor="car">Автомобиль</label>
+                          <span className="helper-text" data-error="wrong" data-success="right">Марка авто</span>
+                        </div>
+                        <div className="input-field col s6">
+                          <label>
+                            <input
+                              type="checkbox"
+                              className="filled-in"
+                              name="isCarVisible"
+                              value={currentUser.isCarVisible}
+                              onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                            />
+                            <span>Показывать всем</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col s12">
+                      <div className="row">
+                        <div className="input-field col s6">
+                          <input
+                            id="carNumber"
+                            type="text"
+                            className="validate"
+                            name="carNumber"
+                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                          />
+                          <label htmlFor="carNumber">Номер авто</label>
+                        </div>
+                        <div className="input-field col s6">
+                          <label>
+                            <input
+                              type="checkbox"
+                              className="filled-in"
+                              name="isCarNumberVisible"
+                              value={currentUser.isCarNumberVisible}
+                              onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                            />
+                            <span>Показывать всем</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  : ''
+                }
+
               </div>
             </form>
           </div>
