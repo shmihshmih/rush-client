@@ -8,6 +8,7 @@ import {hideAuth, showAuth} from "../../station/action";
 function NavBar(props) {
   const myRoutes = MyRoutes;
   const [MyTitle, setMyTitle] = useState(document.title);
+  const [authorization, setAuthorization] = useState(false)
 
   // TODO add redux logic here
 
@@ -29,6 +30,11 @@ function NavBar(props) {
     props.isAuthOpenReducer.isAuthOpen ? props.hideAuth() : props.showAuth()
   }
 
+  function signOff() {
+    //localStorage.removeItem(storageName)
+    setAuthorization(false)
+  }
+
   return (
     <nav>
       <div className="nav-wrapper">
@@ -38,7 +44,19 @@ function NavBar(props) {
           })}
         </ul>
         <ul className="right">
-          <li><a onClick={authHandler}>Войти</a></li>
+          {authorization === true
+            ?
+            <>
+              <li>
+                <NavLink to="/profile/:id" exact>Профиль</NavLink>
+              </li>
+              <li>
+                <a onClick={signOff} exact>Выйти</a>
+              </li>
+            </>
+            :
+            <li><a onClick={authHandler}>Войти</a></li>
+          }
         </ul>
       </div>
     </nav>

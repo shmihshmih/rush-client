@@ -15,9 +15,11 @@ function Auth(props) {
     isPedestrian: false,
     isDriver: false})
   const [openRegForm, setOpenRegForm] = useState('')
+  const storageName = 'userData'
 
   function modalHandler() {
     authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
+    setOpenRegForm('')
   }
 
   const inputKeyPressHandler = (e) => {
@@ -35,10 +37,18 @@ function Auth(props) {
         ...currentUser
       })
         .then((res) => {
-          if (res.data && res.data.isExist && res.data.isExist.email || res.data.createdNow) {
-            setOpenRegForm('login')
+          if(res.data && res.data.token) {
+            console.log('avtorizovalis!')
+            localStorage.setItem(storageName, JSON.stringify({
+              userEmail: res.data.email, token: res.data.token
+            }))
+            props.hideAuth()
           } else {
-            setOpenRegForm('registration')
+            if (res.data && (res.data.email || res.data.createdNow)) {
+              setOpenRegForm('login')
+            } else {
+              setOpenRegForm('registration')
+            }
           }
         })
         .catch(function (error) {
@@ -47,8 +57,6 @@ function Auth(props) {
     } catch (e) {
       console.log('error', e.message)
     }
-
-    setOpenRegForm ? console.log('do reg') : modalHandler()
   }
 
   useEffect(() => {
