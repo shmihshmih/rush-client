@@ -1,7 +1,6 @@
 import {HIDE_AUTH, SHOW_AUTH, LOG_IN, LOG_OUT} from "./type";
 import {combineReducers} from "redux";
 import * as axios from "axios";
-import {useState} from "react";
 
 const authInitialState = {
   isAuthOpen: false,
@@ -37,7 +36,6 @@ function logInReducer(state = logInitialState, action) {
 
       const storageName = 'userData'
       const logErrors = []
-      let setOpenRegForm = ''
 
       try {
         axios.post('http://127.0.0.1:5000/api/auth/', {
@@ -52,9 +50,9 @@ function logInReducer(state = logInitialState, action) {
               //props.hideAuth()
             } else {
               if (res.data && (res.data.email || res.data.createdNow)) {
-                setOpenRegForm = 'login'
+
               } else {
-                setOpenRegForm = 'registration'
+
               }
             }
           })
@@ -65,7 +63,7 @@ function logInReducer(state = logInitialState, action) {
         logErrors.push(e.message)
       }
 
-      return { logErrors, setOpenRegForm, asd: 'asdasd'}
+      return { logErrors, asd: 'asdasd'}
     case LOG_OUT:
       return;
     default:
@@ -73,7 +71,19 @@ function logInReducer(state = logInitialState, action) {
   }
 }
 
+function regOrLoginFormReducer(state = {form: ''}, action) {
+  switch(action.type) {
+    case 'REG_FORM':
+      return {...state, form: 'REG_FORM'}
+    case 'LOGIN_FORM':
+      return {...state, form: 'LOGIN_FORM'}
+    default:
+      return {...state, figu:'figu'}
+  }
+}
+
 export const rootReducer = combineReducers({
   isAuthOpenReducer: authReducer,
-  isLogged: logInReducer
+  isLogged: logInReducer,
+  whichFormToOpen: regOrLoginFormReducer
 })

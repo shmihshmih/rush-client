@@ -46,8 +46,10 @@ function Auth(props) {
           } else {
             if (res.data && (res.data.email || res.data.createdNow)) {
               setOpenRegForm('login')
+              console.log(props)
             } else {
               setOpenRegForm('registration')
+              console.log(props)
             }
           }
         })
