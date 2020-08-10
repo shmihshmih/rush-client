@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {hideAuth, showAuth} from "../../station/actions/authAction";
 import {logStatus} from "../../station/actions/logInAction";
 import {closeLoginRegForm} from "../../station/actions/regLoginFormAction";
+import navStyles from './NavBar.module.css'
 
 function NavBar(props) {
   const myRoutes = MyRoutes;
@@ -47,7 +48,7 @@ function NavBar(props) {
       <div className="nav-wrapper">
         <ul onClick={() => titleHandler()} id="nav-mobile" className="left">
           {MyRoutes.map((item, index) => {
-            return <li key={item.component}><NavLink to={item.path}>{item.caption}</NavLink></li>
+            return <li className={navStyles.carbonDeoxide} key={item.component}><NavLink to={item.path}>{item.caption}</NavLink></li>
           })}
         </ul>
         <ul className="right">
