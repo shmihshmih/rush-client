@@ -1,16 +1,12 @@
 import {HIDE_AUTH, SHOW_AUTH} from "../type";
-
-const authInitialState = {
-  isAuthOpen: false,
-  authVisClass: "authNotVisible"
-}
+import {authInitialState} from "../initial";
 
 export function authReducer(state = authInitialState, action) {
   switch (action.type) {
     case SHOW_AUTH:
-      return {...state, isAuthOpen: true, authVisClass: "authVisible"};
+      return {...state, ...action.payload};
     case HIDE_AUTH:
-      return {...state, isAuthOpen: false, authVisClass: "authNotVisible"};
+      return {...state, ...action.payload};
     default:
       return {...state};
   }

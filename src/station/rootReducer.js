@@ -6,5 +6,6 @@ import {regFormReducer} from "./reducers/regFormReducer";
 export const rootReducer = combineReducers({
   isAuthOpenReducer: authReducer,
   isLogged: logInReducer,
-  whichFormOpen: regFormReducer
+  whichFormOpen: regFormReducer,
+  currentLogForm: logInReducer
 })

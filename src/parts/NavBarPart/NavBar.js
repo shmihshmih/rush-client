@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import {MyRoutes} from "../../MyRoutes";
 import {} from "./NavBar.module.css"
 import {connect} from "react-redux";
-import {hideAuth, showAuth} from "../../station/action";
+import {hideAuth, showAuth} from "../../station/actions/authAction";
 
 function NavBar(props) {
   const myRoutes = MyRoutes;

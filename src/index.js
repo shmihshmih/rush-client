@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import Auth from "./parts/AuthPart/Auth";
 import {applyMiddleware, compose, createStore} from "redux";
-import {rootReducer} from "./station/reducer";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
+import {rootReducer} from "./station/rootReducer";
 
 const store = createStore(
   rootReducer,

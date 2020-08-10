@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import {LOG_IN, LOG_OUT} from "../type";
+import {CHANGE_CURRENT_LOG_FORM, LOG_IN, LOG_OUT} from "../type";
 
 const storageName = 'userData'
 const logErrors = []
@@ -40,5 +40,12 @@ export function logIn(user) {
 export function logOut(user) {
   return {
     type: LOG_OUT
+  }
+}
+
+export function changeCurrentLogForm(userForm) {
+  return {
+    type: CHANGE_CURRENT_LOG_FORM,
+    payload: userForm
   }
 }

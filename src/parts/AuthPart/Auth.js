@@ -1,25 +1,19 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import './Auth.css'
 import {connect} from "react-redux"
-import {hideAuth, showAuth} from '../../station/action'
 import ReactDOM from 'react-dom'
 import * as axios from "axios";
+import {changeCurrentLogForm} from "../../station/actions/logInAction";
+import {hideAuth, showAuth} from "../../station/actions/authAction";
+import {closeLoginRegForm, openLoginForm, openRegForm} from "../../station/actions/regLoginFormAction";
 
 function Auth(props) {
   //TODO harcoded change to bd
-  const [authStatus, setAuthStatus] = useState(props.isAuthOpenReducer);
-  const [currentUser, setCurrentUser] = useState({
-    email: "",
-    isCarNumberVisible: false,
-    isCarVisible: false,
-    isPedestrian: false,
-    isDriver: false})
-  const [openRegForm, setOpenRegForm] = useState('')
   const storageName = 'userData'
 
   function modalHandler() {
-    authStatus.isAuthOpen ? props.hideAuth() : props.showAuth()
-    setOpenRegForm('')
+    props.isAuthOpenReducer.isAuthOpen ? props.hideAuth() : props.showAuth()
+    props.closeLoginRegForm()
   }
 
   const inputKeyPressHandler = (e) => {
@@ -31,10 +25,15 @@ function Auth(props) {
     }
   }
 
+  const onFormChange = (e) => {
+    props.changeCurrentLogForm({ ...{[e.target.name]: e.target.value}})
+    console.log(props)
+  }
+
   const authHandler = async () => {
     try {
       axios.post('http://127.0.0.1:5000/api/auth/', {
-        ...currentUser
+        //...currentUser
       })
         .then((res) => {
           if(res.data && res.data.token) {
@@ -45,10 +44,10 @@ function Auth(props) {
             props.hideAuth()
           } else {
             if (res.data && (res.data.email || res.data.createdNow)) {
-              setOpenRegForm('login')
+              props.openLogForm()
               console.log(props)
             } else {
-              setOpenRegForm('registration')
+              props.openRegForm()
               console.log(props)
             }
           }
@@ -61,13 +60,9 @@ function Auth(props) {
     }
   }
 
-  useEffect(() => {
-    setAuthStatus(props.isAuthOpenReducer)
-  }, [props.isAuthOpenReducer.isAuthOpen])
-
   let Auth = (
     <>
-      <div id="modal1" className={authStatus.isAuthOpen ? "modal open-modal" : "modal"}>
+      <div id="modal1" className={props.isAuthOpenReducer.isAuthOpen ? "modal open-modal" : "modal"}>
         <div className="modal-content">
           <h4>Войти</h4>
           <div className="row">
@@ -80,8 +75,8 @@ function Auth(props) {
                     type="email"
                     name="email"
                     className="validate"
-                    value={currentUser.email}
-                    onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                    value={props.currentLogForm.email}
+                    onChange={e => onFormChange(e)}
                     onKeyPress={inputKeyPressHandler}
                   />
                   <label htmlFor="email">Email</label>
@@ -90,7 +85,7 @@ function Auth(props) {
                   </span>
                 </div>
 
-                {openRegForm === 'login'
+                {props.whichFormOpen.formType === 'login'
                   ?
                   <div>
                     <div className="input-field col s12">
@@ -99,7 +94,8 @@ function Auth(props) {
                         type="password"
                         className="validate"
                         name="password"
-                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                        value={props.currentLogForm.password}
+                        onChange={e => onFormChange(e)}
                       />
                       <label htmlFor="password">Введите пароль</label>
                     </div>
@@ -107,7 +103,7 @@ function Auth(props) {
                   : ''
                 }
 
-                {openRegForm === 'registration'
+                {props.whichFormOpen.formType === 'registration'
                   ?
                   <div>
 
@@ -117,7 +113,8 @@ function Auth(props) {
                         type="password"
                         className="validate"
                         name="password"
-                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                        value={props.currentLogForm.password}
+                        onChange={e => onFormChange(e)}
                       />
                       <label htmlFor="password">Введите пароль</label>
                     </div>
@@ -128,7 +125,8 @@ function Auth(props) {
                         type="text"
                         className="validate"
                         name="name"
-                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                        value={props.currentLogForm.name}
+                        onChange={e => onFormChange(e)}
                       />
                       <label htmlFor="name">Введите имя</label>
                     </div>
@@ -139,7 +137,8 @@ function Auth(props) {
                         type="text"
                         className="validate"
                         name="birth"
-                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                        value={props.currentLogForm.birth}
+                        onChange={e => onFormChange(e)}
                       />
                       <label htmlFor="birth_date">Дата рождения</label>
                       <span className="helper-text" data-error="wrong"
@@ -153,7 +152,8 @@ function Auth(props) {
                             id="about"
                             className="materialize-textarea"
                             name="about"
-                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                            value={props.currentLogForm.about}
+                            onChange={e => onFormChange(e)}
                           />
                           <label htmlFor="about">О себе</label>
                           <span className="helper-text" data-error="wrong" data-success="right">Можно указать своё хобби, ключевые навыки и т.д.</span>
@@ -168,8 +168,8 @@ function Auth(props) {
                             type="checkbox"
                             className="filled-in"
                             name="isDriver"
-                            value={currentUser.isDriver}
-                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                            value={props.currentLogForm.isDriver}
+                            onChange={e => onFormChange(e)}
                           />
                           <span>Водитель</span>
                         </label>
@@ -178,8 +178,8 @@ function Auth(props) {
                             type="checkbox"
                             className="filled-in"
                             name="isPedestrian"
-                            value={currentUser.isPedestrian}
-                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                            value={props.currentLogForm.isPedestrian}
+                            onChange={e => onFormChange(e)}
                           />
                           <span>Пассажир</span>
                         </label>
@@ -192,7 +192,8 @@ function Auth(props) {
                         type="text"
                         className="validate"
                         name="avatar"
-                        onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                        value={props.currentLogForm.avatar}
+                        onChange={e => onFormChange(e)}
                       />
                       <label htmlFor="avatar">Ссылка на аватар</label>
                     </div>
@@ -205,7 +206,8 @@ function Auth(props) {
                             type="text"
                             className="validate"
                             name="car"
-                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                            value={props.currentLogForm.car}
+                            onChange={e => onFormChange(e)}
                           />
                           <label htmlFor="car">Автомобиль</label>
                           <span className="helper-text" data-error="wrong" data-success="right">Марка авто</span>
@@ -216,8 +218,8 @@ function Auth(props) {
                               type="checkbox"
                               className="filled-in"
                               name="isCarVisible"
-                              value={currentUser.isCarVisible}
-                              onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                              value={props.currentLogForm.isCarVisible}
+                              onChange={e => onFormChange(e)}
                             />
                             <span>Показывать всем</span>
                           </label>
@@ -233,7 +235,8 @@ function Auth(props) {
                             type="text"
                             className="validate"
                             name="carNumber"
-                            onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.value}})}
+                            value={props.currentLogForm.carNumber}
+                            onChange={e => onFormChange(e)}
                           />
                           <label htmlFor="carNumber">Номер авто</label>
                         </div>
@@ -243,8 +246,8 @@ function Auth(props) {
                               type="checkbox"
                               className="filled-in"
                               name="isCarNumberVisible"
-                              value={currentUser.isCarNumberVisible}
-                              onChange={e => setCurrentUser({...currentUser, ...{[e.target.name]: e.target.checked}})}
+                              value={props.currentLogForm.isCarNumberVisible}
+                              onChange={e => onFormChange(e)}
                             />
                             <span>Показывать всем</span>
                           </label>
@@ -255,7 +258,6 @@ function Auth(props) {
                   </div>
                   : ''
                 }
-
               </div>
             </form>
           </div>
@@ -264,7 +266,7 @@ function Auth(props) {
           <a onClick={authHandler} className="modal-close waves-effect waves-green btn-flat">Войти</a>
         </div>
       </div>
-      <div onClick={modalHandler} className={authStatus.isAuthOpen ? "modal-overlay" : ""}/>
+      <div onClick={modalHandler} className={props.isAuthOpenReducer.isAuthOpen ? "modal-overlay" : ""}/>
     </>
   )
   return ReactDOM.createPortal(Auth, document.getElementById('auth-modal'))
@@ -276,7 +278,11 @@ const mapStateToProps = (stateFromReducer) => {
 
 const mapDispatchToProps = {
   hideAuth,
-  showAuth
+  showAuth,
+  changeCurrentLogForm,
+  openLoginForm,
+  openRegForm,
+  closeLoginRegForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
