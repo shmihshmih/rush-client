@@ -1,45 +1,50 @@
 import * as axios from "axios";
-import {CHANGE_CURRENT_LOG_FORM, LOG_IN, LOG_OUT} from "../type";
+import {CHANGE_CURRENT_LOG_FORM, IS_USER_EXIST, LOG_IN, LOG_OUT, LOG_STATUS, OPEN_LOGIN_FORM} from "../type";
+import {closeLoginRegForm, openLoginForm, openRegForm} from "./regLoginFormAction";
+import {authAPI} from "../../api/authAPI";
+import {hideAuth} from "./authAction";
 
 const storageName = 'userData'
 const logErrors = []
 
-export function logIn(user) {
-  const currentUser = {...user}
-  try {
-    axios.post('http://127.0.0.1:5000/api/auth/', {
-      ...currentUser
-    })
-      .then( async (res) => {
-        if(res.data && res.data.token) {
-          console.log('avtorizovalis!')
-          localStorage.setItem(storageName, JSON.stringify({
-            userEmail: res.data.email, token: res.data.token
-          }))
-          //hideAuth()
-        } else {
-          if (res.data && (res.data.email || res.data.createdNow)) {
-            //openRegForm = Object.assign({},{v:'login'})
-          } else {
-            //openRegForm = Object.assign({},{v:'register'})
-          }
-        }
-      })
-      .catch(function (error) {
-        logErrors.push(error.message)
-      });
-  } catch (e) {
-    logErrors.push(e.message)
+export const isUserExistTC = email => async dispatch => {
+  const userExistence = await authAPI.isUserExist(email)
+  if (userExistence.status === 666) {
+    dispatch(openRegForm())
   }
-  return {
-    type: LOG_IN,
-    payLoad: {user: {...currentUser}, logErrors}
+  if (userExistence.status === 777) {
+    dispatch(openLoginForm())
+  }
+  return userExistence
+}
+
+export const logIn = (email, password) => async dispatch => {
+  const logInData = await authAPI.logIn(email, password)
+  if (logInData.status === 888) {
+    console.log('ne sovpal(((')
+  }
+  if (logInData.status === 555) {
+    if (logInData && logInData.token) {
+      localStorage.setItem(storageName, JSON.stringify({
+        userEmail: logInData.email, token: logInData.token
+      }))
+      dispatch(logStatus())
+      dispatch(hideAuth())
+    }
   }
 }
 
-export function logOut(user) {
+export const registration = formData => async dispatch => {
+  const regData = await authAPI.registration(formData)
+  if(regData.status === 999) {
+    dispatch(logIn(regData.user.email, regData.user.password))
+  }
+}
+
+export function logStatus() {
   return {
-    type: LOG_OUT
+    type: LOG_STATUS,
+    payload: JSON.parse(localStorage.getItem(storageName)) || false
   }
 }
 

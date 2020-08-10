@@ -2,14 +2,14 @@ import React from "react"
 import './Auth.css'
 import {connect} from "react-redux"
 import ReactDOM from 'react-dom'
-import * as axios from "axios";
-import {changeCurrentLogForm} from "../../station/actions/logInAction";
+import {changeCurrentLogForm, isUserExistTC, logIn, logStatus, registration} from "../../station/actions/logInAction";
 import {hideAuth, showAuth} from "../../station/actions/authAction";
 import {closeLoginRegForm, openLoginForm, openRegForm} from "../../station/actions/regLoginFormAction";
+import Toast from "react-materialize/lib/Toast";
+
 
 function Auth(props) {
   //TODO harcoded change to bd
-  const storageName = 'userData'
 
   function modalHandler() {
     props.isAuthOpenReducer.isAuthOpen ? props.hideAuth() : props.showAuth()
@@ -19,45 +19,24 @@ function Auth(props) {
   const inputKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      authHandler().then((req, res) => {
-        console.log(res);
-      });
+      const enterHundler = checkHandler()
     }
   }
 
   const onFormChange = (e) => {
-    props.changeCurrentLogForm({ ...{[e.target.name]: e.target.value}})
-    console.log(props)
+    props.changeCurrentLogForm({ ...{[e.target.name]: e.target.value}});
+  }
+
+  const checkHandler = async () => {
+    const userExistence = await props.isUserExistTC(props.currentLogForm.email)
   }
 
   const authHandler = async () => {
-    try {
-      axios.post('http://127.0.0.1:5000/api/auth/', {
-        //...currentUser
-      })
-        .then((res) => {
-          if(res.data && res.data.token) {
-            console.log('avtorizovalis!')
-            localStorage.setItem(storageName, JSON.stringify({
-              userEmail: res.data.email, token: res.data.token
-            }))
-            props.hideAuth()
-          } else {
-            if (res.data && (res.data.email || res.data.createdNow)) {
-              props.openLogForm()
-              console.log(props)
-            } else {
-              props.openRegForm()
-              console.log(props)
-            }
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } catch (e) {
-      console.log('error', e.message)
-    }
+    const userLogIn = await props.logIn(props.currentLogForm.email, props.currentLogForm.password)
+  }
+
+  const regHandler = async (formData) => {
+    const regData = await props.registration(formData)
   }
 
   let Auth = (
@@ -262,9 +241,23 @@ function Auth(props) {
             </form>
           </div>
         </div>
-        <div className="modal-footer">
-          <a onClick={authHandler} className="modal-close waves-effect waves-green btn-flat">Войти</a>
-        </div>
+        }
+        {!props.whichFormOpen.formType
+          ?
+          <div className="modal-footer">
+            <a onClick={checkHandler} className="modal-close waves-effect waves-green btn-flat">Логин</a>
+          </div>
+          :
+          props.whichFormOpen.formType === 'login'
+          ?
+          <div className="modal-footer">
+            <a onClick={authHandler} className="modal-close waves-effect waves-green btn-flat">Войти</a>
+          </div>
+          :
+          <div className="modal-footer">
+            <a onClick={() => {regHandler(props.currentLogForm)}} className="modal-close waves-effect waves-green btn-flat">Регистрация</a>
+          </div>
+        }
       </div>
       <div onClick={modalHandler} className={props.isAuthOpenReducer.isAuthOpen ? "modal-overlay" : ""}/>
     </>
@@ -282,7 +275,11 @@ const mapDispatchToProps = {
   changeCurrentLogForm,
   openLoginForm,
   openRegForm,
-  closeLoginRegForm
+  closeLoginRegForm,
+  logIn,
+  isUserExistTC,
+  logStatus,
+  registration
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

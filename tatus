@@ -1,0 +1,127 @@
+[33mcommit bf03ef0a5faa946f9d16dfe98871d9219323f539[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Mon Aug 10 09:02:23 2020 +0300
+
+    auth without setState etc
+
+[33mcommit 68e6a9ea3ccf4e72a794222b1b3641c26f04c5d1[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Mon Aug 3 08:10:32 2020 +0300
+
+    prereducers'
+    
+    ;
+
+[33mcommit c5e441669c722c12a7302cd2c4cbbd897ac0c1dd[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Sun Jul 26 16:30:53 2020 +0300
+
+    prenormal state
+
+[33mcommit 03cddb7bf6459ae2af6c96add1e1d956dad95993[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 22 23:39:49 2020 +0300
+
+    simple registration
+
+[33mcommit 237e36e7e504c79a4f3965f85998137c315d53ae[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 22 17:45:14 2020 +0300
+
+    email front end communication
+
+[33mcommit db7a636f3c1c4294d56a7990eeac17681f02fdbe[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Tue Jul 21 21:31:37 2020 +0300
+
+    first working CORS axios
+
+[33mcommit 4ed3f59d56241182702040d5676078ca33ed1834[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Tue Jul 21 17:12:20 2020 +0300
+
+    axios attemps
+
+[33mcommit edb250a9193616dd7aa7ed4443eb9b6ca261cb55[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Fri Jul 17 17:22:00 2020 +0300
+
+    start input
+
+[33mcommit d65e634e0e6af000c1ae237667b7fbc5c0914186[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Thu Jul 16 16:48:58 2020 +0300
+
+    layout creating
+
+[33mcommit 98a21134afb034d273487d5fb48973b1d2c47650[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Thu Jul 16 07:37:55 2020 +0300
+
+    cleaner
+
+[33mcommit c74b1920401dae0aff28d8d6a0e663aefed3f5ce[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 15 17:32:56 2020 +0300
+
+    druck this TSgit add .git add .!
+
+[33mcommit 741fef2a98bca13fd45920ec02ecbca000694c9d[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 15 16:25:53 2020 +0300
+
+    modal + overlay
+
+[33mcommit dc8ccff1ae261885013f9c1bdd7f658955f72dce[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 15 15:53:03 2020 +0300
+
+    refactor into Portal
+
+[33mcommit 7621cb46076e1fc08db396cde8d1bfbdba785530[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 15 15:23:21 2020 +0300
+
+    working redux one store two components
+
+[33mcommit b46d5411989980dbac6afc1bf440c98129ea153f[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Tue Jul 14 17:26:49 2020 +0300
+
+    auth redux
+
+[33mcommit 8dcbcff22485dc1b5adb44abf98688db2d17b09b[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Tue Jul 14 15:49:26 2020 +0300
+
+    tsx => js, redux popcorn
+
+[33mcommit 28267722bb702f95b1e5a777471da925f7010537[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Mon Jul 13 17:49:55 2020 +0300
+
+    connector created
+
+[33mcommit 427905bc741fa638f4860707fb9d226101445da1[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Mon Jul 13 17:24:01 2020 +0300
+
+    before connect +
+
+[33mcommit b9cb0bd3f26b0f366f53112cdcb148c53f6c42a1[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Mon Jul 13 17:22:40 2020 +0300
+
+    before connect
+
+[33mcommit 7905074fc880668f379a33af783fd4b8542e9f2f[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Mon Jul 13 15:09:02 2020 +0300
+
+    modal
+
+[33mcommit f5230e5b3cb0f03ac07e3f890a649c041a785bf2[m
+Author: shmihshmih <shmihshmih@gmail.com>
+Date:   Wed Jul 8 21:22:58 2020 +0300
+
+    init

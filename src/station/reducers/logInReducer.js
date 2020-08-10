@@ -1,4 +1,4 @@
-import {CHANGE_CURRENT_LOG_FORM, LOG_IN, LOG_OUT} from "../type";
+import {CHANGE_CURRENT_LOG_FORM, LOG_IN, LOG_OUT, LOG_STATUS, USER_REGISTRATION} from "../type";
 import {logInitialState} from "../initial";
 
 export function logInReducer(state = logInitialState, action) {
@@ -9,6 +9,11 @@ export function logInReducer(state = logInitialState, action) {
       return;
     case CHANGE_CURRENT_LOG_FORM:
       return { ...state, ...action.payload};
+    case LOG_STATUS:
+      return {...state, ...action.payload}
+    case USER_REGISTRATION: {
+      return {...state, ...action.payload}
+    }
     default:
       return {...state}
   }

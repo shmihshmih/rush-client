@@ -4,11 +4,16 @@ import {MyRoutes} from "../../MyRoutes";
 import {} from "./NavBar.module.css"
 import {connect} from "react-redux";
 import {hideAuth, showAuth} from "../../station/actions/authAction";
+import {logStatus} from "../../station/actions/logInAction";
+import {closeLoginRegForm} from "../../station/actions/regLoginFormAction";
 
 function NavBar(props) {
   const myRoutes = MyRoutes;
   const [MyTitle, setMyTitle] = useState(document.title);
-  const [authorization, setAuthorization] = useState(false)
+
+  const storageName = 'userData'
+
+  const authFromToken = JSON.parse(localStorage.getItem(storageName)) || null
 
   // TODO add redux logic here
 
@@ -24,6 +29,7 @@ function NavBar(props) {
     let docTitle = myRoutes.find(item => item.path == window.location.pathname);
     setMyTitle(docTitle ? docTitle['caption'] : "RUSH GAME Project");
     document.title = MyTitle;
+    let isAuthed = props.logStatus().payload
   }
 
   function authHandler() {
@@ -31,8 +37,9 @@ function NavBar(props) {
   }
 
   function signOff() {
-    //localStorage.removeItem(storageName)
-    setAuthorization(false)
+    localStorage.removeItem(storageName)
+    props.logStatus()
+    props.closeLoginRegForm()
   }
 
   return (
@@ -44,7 +51,7 @@ function NavBar(props) {
           })}
         </ul>
         <ul className="right">
-          {authorization === true
+          {authFromToken
             ?
             <>
               <li>
@@ -69,7 +76,9 @@ const mapStateToProps = (stateFromReducer) => {
 
 const mapDispatchToProps = {
   hideAuth,
-  showAuth
+  showAuth,
+  logStatus,
+  closeLoginRegForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
