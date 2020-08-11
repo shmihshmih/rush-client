@@ -5,9 +5,9 @@
     }
 
     .carbonDeoxide {
-        display: block;
+        display: inline-block;
         background-color: #ee6e73;
-        float: none;
+
     }
 
 }

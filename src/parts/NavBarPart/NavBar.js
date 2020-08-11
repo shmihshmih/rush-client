@@ -51,7 +51,7 @@ function NavBar(props) {
             return <li className={navStyles.carbonDeoxide} key={item.component}><NavLink to={item.path}>{item.caption}</NavLink></li>
           })}
         </ul>
-        <ul className="right">
+        <ul className={navStyles.carbonDeoxide + " right"}>
           {authFromToken
             ?
             <>

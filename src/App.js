@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {AboutPage} from "./pages/AboutPage/AboutPage";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Switch, Route, useLocation} from "react-router-dom";
 import {MainPage} from "./pages/MainPage/MainPage";
 import {RatingPage} from "./pages/RatingPage/RatingPage";
 import {ProfilePage} from "./pages/ProfilePage/ProfilePage";
@@ -8,11 +8,12 @@ import NavBar from "./parts/NavBarPart/NavBar";
 import {SoloQuestPage} from "./pages/QuestsPage/QuestsPage";
 import {Footer} from "./parts/FooterPart/Footer";
 import {NoMatchPage} from "./pages/NoMatchPage/noMatchPage";
+import {QuestPage} from "./pages/QuestPage/QuestPage";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter >
         <NavBar/>
         <div className="container">
           <Switch>
@@ -21,6 +22,7 @@ function App() {
             <Route exact path='/about' component={AboutPage}/>
             <Route exact path='/profile/:id' component={ProfilePage}/>
             <Route exact path='/solo' component={SoloQuestPage}/>
+            <Route exact  path='/solo/:id/:step?' component={QuestPage}/>
             <Route component={NoMatchPage} />
           </Switch>
         </div>

@@ -4,6 +4,7 @@ import Col from "react-materialize/lib/Col";
 import Card from "react-materialize/lib/Card";
 import Icon from "react-materialize/lib/Icon";
 import CardTitle from "react-materialize/lib/CardTitle";
+import {NavLink} from "react-router-dom";
 
 export const SoloQuestPage = () => {
   //TODO fetch this from bd
@@ -45,8 +46,8 @@ export const SoloQuestPage = () => {
   const archivedQuests = [
     {
       id: 4,
-      caption: "Quest of your bobo",
-      description: "a small journey to your ggagabuda",
+      caption: "Стань стальной крысой!!!",
+      description: "Последнее произведение Гарри Гаррисона из его знаменитой серии о Крысе из Нержавеющей стали представляет собой роман-игру — жанр, популярный на Западе, но неизвестный отечественному читателю. Поэтому несколько предварительных замечаний: — следуйте советам вашего инструктора; — попав в лабиринт, непременно запаситесь бумагой и карандашом, иначе вам из него не выбраться; — прервав чтение, обязательно записывайте номер главы, на которой остановились. Желаем удачи! Помните: только от вас зависит спасение Вселенной!",
       type: "solo",
       created: "28-05-2020",
       played: "28",
@@ -90,16 +91,14 @@ export const SoloQuestPage = () => {
                         s={12}
             >
               <Card
-                closeIcon={<Icon>close</Icon>}
+                closeIcon={<Icon>Свернуть</Icon>}
                 header={<CardTitle image={item.cover} reveal waves="light"/>}
                 reveal={<p>{item.description}</p>}
-                revealIcon={<Icon>more_vert</Icon>}
+                revealIcon={<Icon>Развернуть</Icon>}
                 title={item.caption}
               >
                 <p>
-                  <a href={item.id}>
-                    Подробнее
-                  </a>
+                  <NavLink to={"/solo/" + item.id}>Узнать больше</NavLink>
                 </p>
               </Card>
             </Col>
@@ -115,16 +114,14 @@ export const SoloQuestPage = () => {
                         s={12}
             >
               <Card
-                closeIcon={<Icon>close</Icon>}
+                closeIcon={<Icon>Свернуть</Icon>}
                 header={<CardTitle image={item.cover} reveal waves="light"/>}
                 reveal={<p>{item.description}</p>}
-                revealIcon={<Icon>more_vert</Icon>}
+                revealIcon={<Icon>Развернуть</Icon>}
                 title={item.caption}
               >
                 <p>
-                  <a href={item.id}>
-                    Подробнее
-                  </a>
+                  <NavLink to={"/solo/" + item.id}>Узнать больше</NavLink>
                 </p>
               </Card>
             </Col>

@@ -14,6 +14,7 @@ export const MainPage = () => {
     <div>
       <h3>Будь здоров, товарищ!</h3>
       <h4>Добро пожаловать в наше уютное сообщество!</h4>
+      <h4>В настоящий момент работает <NavLink key="1" to={"/solo/4/"}>один проект</NavLink>, все остальное в разработке</h4>
       <h5>Чем мы тут занимаемся:</h5>
       <Row>
         <Col
@@ -21,15 +22,15 @@ export const MainPage = () => {
           s={12}
         >
           <Card
-            closeIcon={<Icon>close</Icon>}
-            header={<CardTitle image="https://materializecss.com/images/sample-1.jpg" reveal waves="light"/>}
+            closeIcon={<Icon>Свернуть</Icon>}
+            header={<CardTitle image="https://picsum.photos/200/200?random=1" reveal waves="light"/>}
             reveal={
               <p>
                 Поисковые игры — одиночные или командные игры на местности с элементами городского ориентирования,
                 проводящиеся преимущественно в ночное время.
               </p>
             }
-            revealIcon={<Icon>more_vert</Icon>}
+            revealIcon={<Icon>Развернуть</Icon>}
             title="Поисковые игры на местности"
           >
             <p>
@@ -42,14 +43,14 @@ export const MainPage = () => {
           s={12}
         >
           <Card
-            closeIcon={<Icon>close</Icon>}
-            header={<CardTitle image="https://materializecss.com/images/sample-1.jpg" reveal waves="light"/>}
+            closeIcon={<Icon>Свернуть</Icon>}
+            header={<CardTitle image="https://picsum.photos/200/200?random=2" reveal waves="light"/>}
             reveal={
               <p>
                 Квесты и викторины, которые можно проходить в одиночку.
               </p>
             }
-            revealIcon={<Icon>more_vert</Icon>}
+            revealIcon={<Icon>Развернуть</Icon>}
             title="Соло онлайн-квесты"
           >
             <p>
@@ -62,11 +63,11 @@ export const MainPage = () => {
         className="carousel"
         carouselId="Carousel-2"
         images={[
-          'https://picsum.photos/250/250?image=0',
-          'https://picsum.photos/250/250?image=1',
-          'https://picsum.photos/250/250?image=2',
-          'https://picsum.photos/250/250?image=3',
-          'https://picsum.photos/250/250?image=4'
+          'https://picsum.photos/200/200?random=3',
+          'https://picsum.photos/200/200?random=4',
+          'https://picsum.photos/200/200?random=5',
+          'https://picsum.photos/200/200?random=6',
+          'https://picsum.photos/200/200?random=7',
         ]}
         options={{
           fullWidth: true,
@@ -81,12 +82,12 @@ export const MainPage = () => {
         >
           <Card
             actions={[
-              <a key="1" href="#">Посмотреть</a>
+              <NavLink key="1" to={"/solo/4/"}>Посмотреть</NavLink>
             ]}
-            closeIcon={<Icon>close</Icon>}
-            header={<CardTitle image="https://materializecss.com/images/sample-1.jpg"/>}
+            closeIcon={<Icon>Свернуть</Icon>}
+            header={<CardTitle image="https://picsum.photos/200/200?random=8"/>}
             horizontal
-            revealIcon={<Icon>more_vert</Icon>}
+            revealIcon={<Icon>Развернуть</Icon>}
           >
             Стань стальной крысой!
           </Card>
@@ -97,12 +98,12 @@ export const MainPage = () => {
         >
           <Card
             actions={[
-              <a key="1" href="#">Посмотреть</a>
+              <NavLink key="1" to={"/solo/4/"}>Посмотреть</NavLink>
             ]}
-            closeIcon={<Icon>close</Icon>}
-            header={<CardTitle image="https://materializecss.com/images/sample-1.jpg"/>}
+            closeIcon={<Icon>Свернуть</Icon>}
+            header={<CardTitle image="https://picsum.photos/200/200?random=9"/>}
             horizontal
-            revealIcon={<Icon>more_vert</Icon>}
+            revealIcon={<Icon>Развернуть</Icon>}
           >
             Полковнику никто не пишет...
           </Card>
