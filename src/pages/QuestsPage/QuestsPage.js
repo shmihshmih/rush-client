@@ -80,12 +80,10 @@ export const SoloQuestPage = () => {
   ]
   return (
     <>
-      <h3>Квесты:</h3>
-      <h4>Активные:</h4>
+      <h4>Соло:</h4>
       <div>
         <Row>
-
-          {activeQuests.map((item) => {
+          {archivedQuests.map((item) => {
             return <Col key={item.id}
                         m={6}
                         s={12}
@@ -105,10 +103,11 @@ export const SoloQuestPage = () => {
           })}
         </Row>
       </div>
-      <h4>Архив:</h4>
+      <h3>Квесты:</h3>
+      <h4>Активные:</h4>
       <div>
         <Row>
-          {archivedQuests.map((item) => {
+          {activeQuests.map((item) => {
             return <Col key={item.id}
                         m={6}
                         s={12}

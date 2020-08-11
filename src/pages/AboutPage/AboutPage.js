@@ -5,10 +5,7 @@ export const AboutPage = () => {
   return (
     <>
       <h4>Мы:</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam aspernatur at aut autem consequuntur
-        cumque debitis deleniti dolore dolorem doloribus eaque, earum eveniet explicabo fuga fugit, impedit itaque
-        laborum libero modi nihil officia placeat possimus provident quidem quisquam reiciendis repellat reprehenderit
-        rerum similique sint suscipit ut vero voluptates voluptatum.</p>
+      <p>Super komanda</p>
       <h4>Что на сайте:</h4>
       <h5>НПИ:</h5>
       <h6>Правила игры:</h6>
@@ -85,9 +82,7 @@ export const AboutPage = () => {
       </p>
       <h5>Квесты:</h5>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus alias aliquam aliquid amet architecto
-        aspernatur commodi corporis cupiditate eaque earum et facere harum illo itaque labore maxime molestiae,
-        necessitatibus nobis possimus, recusandae repellendus similique suscipit ullam ut voluptas voluptates.
+        Budut :)
       </p>
     </>
   )
