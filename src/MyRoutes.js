@@ -2,7 +2,6 @@ import {MainPage} from "./pages/MainPage/MainPage";
 import {AboutPage} from "./pages/AboutPage/AboutPage";
 import {RatingPage} from "./pages/RatingPage/RatingPage";
 import {SoloQuestPage} from "./pages/QuestsPage/QuestsPage";
-import {QuestPage} from "./pages/QuestPage/QuestPage";
 
 export const MyRoutes = [
   {path: "/",            caption: "Главная",     component: MainPage},

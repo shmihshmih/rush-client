@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom'
 import {changeCurrentLogForm, isUserExistTC, logIn, logStatus, registration} from "../../station/actions/logInAction";
 import {hideAuth, showAuth} from "../../station/actions/authAction";
 import {closeLoginRegForm, openLoginForm, openRegForm} from "../../station/actions/regLoginFormAction";
-import Toast from "react-materialize/lib/Toast";
-
 
 function Auth(props) {
   //TODO harcoded change to bd
@@ -81,7 +79,6 @@ function Auth(props) {
                   </div>
                   : ''
                 }
-
                 {props.whichFormOpen.formType === 'registration'
                   ?
                   <div>

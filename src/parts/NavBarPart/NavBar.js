@@ -27,7 +27,7 @@ function NavBar(props) {
 
   function titleHandler() {
     //TODO change hardcoded titlechanger into component
-    let docTitle = myRoutes.find(item => item.path == window.location.pathname);
+    let docTitle = myRoutes.find(item => item.path === window.location.pathname);
     setMyTitle(docTitle ? docTitle['caption'] : "RUSH GAME Project");
     document.title = MyTitle;
     let isAuthed = props.logStatus().payload
@@ -59,7 +59,7 @@ function NavBar(props) {
                 <NavLink to="/profile/:id" exact>Профиль</NavLink>
               </li>
               <li>
-                <a onClick={signOff} exact>Выйти</a>
+                <a onClick={signOff}>Выйти</a>
               </li>
             </>
             :

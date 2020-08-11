@@ -1,6 +1,6 @@
-import React, {useEffect, useLayoutEffect} from 'react';
+import React from 'react';
 import {AboutPage} from "./pages/AboutPage/AboutPage";
-import {BrowserRouter, Switch, Route, useLocation} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {MainPage} from "./pages/MainPage/MainPage";
 import {RatingPage} from "./pages/RatingPage/RatingPage";
 import {ProfilePage} from "./pages/ProfilePage/ProfilePage";

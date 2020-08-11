@@ -30,8 +30,8 @@ export const Footer = () => {
       </div>
       <div className="footer-copyright">
         <div className="container">
-          © 2020 &#128640; by antonkashtanow
-          <a className="grey-text text-lighten-4 right" href="https://github.com/shmihshmih/rush-client">&#128188; to
+          © 2020 <span role="img">&#128640;</span> by antonkashtanow
+          <a className="grey-text text-lighten-4 right" href="https://github.com/shmihshmih/rush-client"><span role="img">&#128188;</span> to
             github</a>
         </div>
       </div>

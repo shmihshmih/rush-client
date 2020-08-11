@@ -1,11 +1,9 @@
-import * as axios from "axios";
-import {CHANGE_CURRENT_LOG_FORM, IS_USER_EXIST, LOG_IN, LOG_OUT, LOG_STATUS, OPEN_LOGIN_FORM} from "../type";
-import {closeLoginRegForm, openLoginForm, openRegForm} from "./regLoginFormAction";
+import {CHANGE_CURRENT_LOG_FORM, LOG_STATUS} from "../type";
+import { openLoginForm, openRegForm} from "./regLoginFormAction";
 import {authAPI} from "../../api/authAPI";
 import {hideAuth} from "./authAction";
 
 const storageName = 'userData'
-const logErrors = []
 
 export const isUserExistTC = email => async dispatch => {
   const userExistence = await authAPI.isUserExist(email)
